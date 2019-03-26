@@ -1,0 +1,8 @@
+{
+    "realm": "BreizhCamp",
+    "auth-server-url": "http://localhost:8080/auth",
+    "ssl-required": "external",
+    "resource": "myapp",
+    "public-client": true,
+    "confidential-port": 0
+  }

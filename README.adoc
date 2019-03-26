@@ -1,0 +1,91 @@
+# PrezKeycloak
+
+## Prerequisites
+
+- https://asciidoctor.org/docs/asciidoctor-revealjs/[asciidoctor-revealjs]
+- https://www.docker.com/[docker]
+- https://docs.docker.com/compose/[docker-compose]
+
+
+## Generate Html format
+
+```
+bundle exec asciidoctor-revealjs main.adoc
+```
+
+
+## Env
+
+Start env 
+```
+cd docker
+docker-compose up
+```
+
+
+Pre-create `Realms`, `User`, `Roles`, `Groups`
+
+
+## Demo
+
+Connection to Keycloak with `admin` "http://localhost:8080/"
+
+Show settings :
+
+* Login
+** User Registration
+** Forgot password
+** Verify email
+* Keys (the public JWT)
+* Email (use `smtp4dev` for demo)
+* Themes
+
+Create new "Clients" `myapp`.
+
+* Valid Redirect URIs : "http://localhost:8081/"
+* Web Origins : "http://localhost:8081"
+
+Copy/paste the JSON config in file `keycloak.json` 
+
+Play with "MyApp" 
+
+* Login
+* Logout
+* Manage Account
+* Test `onLoad: 'check-sso'` in `index.html`
+
+Change configuration :
+
+* `Realm Settings` > `Login`
+** User registration
+** Forgot password 
+** Verify email 
+* `Realm Settings` > `Themes`
+** `Login Theme` : `Breizhcamp`
+** `Internationalization Enabled`
+* `Clients` > `myapp`
+** add Mapper "groups"
+* `Authentication`
+** Required Actions
+** Passwod Policy
+
+
+Play with "MyApp" 
+* Change language
+* test "Forgot password "
+* test create new user
+* test 2FA
+
+
+
+Create new "credential" client in 'OtherRealm'
+In 'BreaizhCamp' Realm, add new Identity Providers :
+
+* Import from 'OtherRealm' url : http://localhost:8080/auth/realms/OtherRealm/.well-known/openid-configuration
+* set the `Client ID` and `Client Secret` of the "credential" client.
+
+Refresh the login page of "MyApp" and play
+
+
+
+

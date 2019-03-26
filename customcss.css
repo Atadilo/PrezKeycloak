@@ -1,0 +1,26 @@
+h1 {
+    color: black !important;
+}
+
+.reveal section img {
+    margin: 0 !important;
+    background: none !important;
+    border: none !important;   
+    box-shadow: none !important ;
+}
+
+
+.reveal blockquote {
+    width: 100% !important;
+}
+
+div.slide-background.title.present {
+    background-image: url("images/ghostbusters-spookcentral.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.linethrough {
+    text-decoration: line-through;
+  }

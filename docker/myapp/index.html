@@ -1,0 +1,54 @@
+<head>
+    <script src="http://localhost:8080/auth/js/keycloak.js"></script>
+    <script>
+        var keycloak = Keycloak();
+
+        function login() {
+            keycloak.login();
+        }
+
+        function logout() {
+            keycloak.logout();
+        }
+
+        function accountManagement() {
+            keycloak.accountManagement();
+        }
+
+        function iAmAuthenticated() {
+            document.getElementById("notConnected").style.display = "none";
+            document.getElementById("connected").style.display = "block";
+
+            document.getElementById("tokenParsed").innerHTML = JSON.stringify(keycloak.tokenParsed, null, 2);
+        }
+
+        keycloak.init({ 
+            //onLoad: 'login-required' 
+            //onLoad: 'check-sso'
+        }).success(function(authenticated) {
+            document.getElementById("notConnected").style.display = "block";
+            document.getElementById("connected").style.display = "none";
+            
+            if (authenticated) {
+                iAmAuthenticated();
+            }
+        }).error(function() {
+            alert('failed to initialize');
+        });
+    </script>
+</head>
+<body>
+    <h1>My APP</h1>
+    <div id="notConnected">
+        <h2 id="isConnected">Not authenticated</h2>
+        <button id="login" type="button" value="login"  onclick="login();" >Login</button>
+    </div>
+    <div id="connected">
+        <h2 id="isConnected">Authenticated</h2>
+        <button id="logout" type="button" value="logout" onclick="logout();" >Logout</button>
+        <button id="accountManagement" type="button" value="accountManagement" onclick="accountManagement();" >accountManagement</button>
+
+        <pre id="tokenParsed" />
+    </div>
+
+</body>
