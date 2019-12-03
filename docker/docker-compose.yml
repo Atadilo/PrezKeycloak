@@ -12,6 +12,7 @@ services:
         - 8081:80
       volumes:
         - ./myapp:/usr/share/nginx/html
+
   postgres:
       image: postgres
       volumes:
@@ -38,6 +39,9 @@ services:
         - 8080:8080
       volumes:
         - ./themes/Breizhcamp/:/opt/jboss/keycloak/themes/Breizhcamp/
+        - ./providers:/opt/jboss/keycloak/providers
+        - ./scripts:/opt/jboss/scripts/
+        - ./deploy:/opt/jboss/keycloak/standalone/deployments
       depends_on:
         - postgres
         - smtp4dev
